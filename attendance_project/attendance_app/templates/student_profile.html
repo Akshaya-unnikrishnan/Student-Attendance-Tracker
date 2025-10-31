@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block title %}Student Profile{% endblock %}
+
+{% block content %}
+<h2 style="text-align:center;">{{ student.name }}'s Attendance Summary</h2>
+<table style="width: 80%; margin: auto; border-collapse: collapse;">
+    <tr>
+        <th style="padding: 10px; border: 1px solid #999;">Subject</th>
+        <th style="padding: 10px; border: 1px solid #999;">Present</th>
+        <th style="padding: 10px; border: 1px solid #999;">Total</th>
+        <th style="padding: 10px; border: 1px solid #999;">Percentage</th>
+    </tr>
+    {% for row in data %}
+    <tr>
+        <td>{{ row.subject.name }}</td>
+        <td>{{ row.present }}</td>
+        <td>{{ row.total }}</td>
+        <td>
+            {% if row.percentage < 75 %}
+                <span style="color: red">{{ row.percentage }}%</span>
+            {% else %}
+                <span style="color: green">{{ row.percentage }}%</span>
+            {% endif %}
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+<br>
+<div style="text-align: center;">
+    <a href="{% url 'dashboard' %}" class="button">Back to Dashboard</a>
+</div>
+{% endblock %}

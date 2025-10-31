@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Student Login{% endblock %}
+
+{% block content %}
+<style>
+    
+
+    .login-container {
+        max-width: 400px;
+        margin: 100px auto;
+        background: rgba(255, 255, 255, 0.97);
+        padding: 40px 30px;
+        border-radius: 16px;
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+        text-align: center;
+    }
+
+    .login-container h2 {
+        margin-bottom: 25px;
+        color: #002b5c;
+        font-weight: bold;
+        font-size: 28px;
+    }
+
+    .login-container input {
+        width: 100%;
+        padding: 12px;
+        margin: 12px 0;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+        font-size: 15px;
+    }
+
+    .login-container button {
+        width: 100%;
+        padding: 12px;
+        background-color: #004080;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: 500;
+        transition: background-color 0.3s ease;
+    }
+
+    .login-container button:hover {
+        background-color: #003060;
+    }
+
+    .error-message {
+        color: red;
+        margin-top: 5px;
+        font-size: 14px;
+    }
+
+    .back-link {
+        display: block;
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .back-link a {
+        color: #004080;
+        background-color: #f0f8ff;
+        padding: 10px 20px;
+        border-radius: 6px;
+        border: 1px solid #004080;
+        text-decoration: none;
+        transition: 0.3s ease;
+    }
+
+    .back-link a:hover {
+        background-color: #e0ecff;
+    }
+
+    @media screen and (max-width: 480px) {
+        .login-container {
+            margin: 60px 20px;
+            padding: 30px 20px;
+        }
+    }
+</style>
+
+<div class="login-container">
+    <h2>Student Login</h2>
+    <form method="POST">
+        {% csrf_token %}
+        {% if error %}
+            <p class="error-message">{{ error }}</p>
+        {% endif %}
+
+        <input type="text" name="registration_number" placeholder="Registration Number" required>
+        <input type="password" name="password" placeholder="Password" required>
+        
+        <button type="submit">Login</button>
+    </form>
+</div>
+
+<div class="back-link">
+    <a href="{% url 'home' %}">← Back to Home</a>
+</div>
+{% endblock %}

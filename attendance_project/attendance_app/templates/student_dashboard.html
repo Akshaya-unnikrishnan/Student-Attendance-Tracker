@@ -1,0 +1,124 @@
+{% extends 'base.html' %}
+{% block title %}Student Dashboard{% endblock %}
+
+{% block content %}
+<style>
+    h2 {
+        text-align: center;
+        margin-top: 30px;
+        font-size: 28px;
+        color: #333;
+    }
+
+    .student-info {
+        text-align: center;
+        margin-top: 10px;
+        font-size: 18px;
+        color: #555;
+    }
+
+    table {
+        width: 85%;
+        margin: 30px auto;
+        border-collapse: collapse;
+        background: white;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        overflow: hidden;
+    }
+
+    th, td {
+        padding: 14px 10px;
+        text-align: center;
+        border-bottom: 1px solid #ddd;
+    }
+
+    th {
+        background-color: #f2f2f2;
+        font-weight: bold;
+        color: #444;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+
+    tr:hover {
+        background-color: #eef5ff;
+    }
+
+    .low-attendance {
+        color: red;
+        font-weight: bold;
+    }
+
+    .high-attendance {
+        color: green;
+        font-weight: bold;
+    }
+
+    .logout {
+        text-align: center;
+        margin-top: 30px;
+    }
+
+    .logout a {
+        padding: 10px 20px;
+        background-color: #dc3545;
+        color: white;
+        text-decoration: none;
+        border-radius: 6px;
+        transition: background-color 0.3s ease;
+        font-weight: bold;
+    }
+
+    .logout a:hover {
+        background-color: #c82333;
+    }
+
+    p.no-data {
+        text-align: center;
+        font-size: 18px;
+        color: #666;
+        margin-top: 40px;
+    }
+</style>
+
+<h2>Welcome, {{ student.name }}</h2>
+<div class="student-info">Classroom: {{ student.classroom.name }}</div>
+
+{% if data %}
+    <table>
+        <thead>
+            <tr>
+                <th>Subject</th>
+                <th>Total Classes</th>
+                <th>Present</th>
+                <th>Attendance %</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for entry in data %}
+            <tr>
+                <td>{{ entry.subject }}</td>
+                <td>{{ entry.total }}</td>
+                <td>{{ entry.present }}</td>
+                <td>
+                    {% if entry.percentage < 75 %}
+                        <span class="low-attendance">{{ entry.percentage }}%</span>
+                    {% else %}
+                        <span class="high-attendance">{{ entry.percentage }}%</span>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p class="no-data">No attendance data available.</p>
+{% endif %}
+
+<div class="logout">
+    <a href="{% url 'student_logout' %}">Logout</a>
+</div>
+{% endblock %}

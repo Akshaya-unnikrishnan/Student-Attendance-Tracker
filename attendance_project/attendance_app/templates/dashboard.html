@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<div class="card" style="background: white; padding: 30px; border-radius: 10px; max-width: 500px; margin: auto; text-align: center; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);">
+    <h2>Welcome, {{ teacher.user.username }}</h2>
+    <p>Subject: <strong>{{ teacher.subject.name }}</strong></p>
+    <a href="{% url 'mark_attendance' %}" class="button">Mark Attendance</a>
+    <a href="{% url 'view_attendance' %}" class="button">View Attendance</a>
+    <a href="{% url 'logout' %}" class="button" style="background-color: #f44336;">Logout</a>
+</div>
+{% endblock %}

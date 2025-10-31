@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block title %}Teacher Login{% endblock %}
+
+{% block content %}
+<form method="POST" style="background: white; padding: 40px 30px; border-radius: 12px; box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); max-width: 350px; margin: auto;">
+    <h2>Teacher Login</h2>
+    {% csrf_token %}
+    {% if error %}<p style="color: red;">{{ error }}</p>{% endif %}
+    <input type="text" name="username" placeholder="Username" required style="width: 100%; padding: 10px; margin: 10px 0; border-radius: 8px; border: 1px solid #ccc;">
+    <input type="password" name="password" placeholder="Password" required style="width: 100%; padding: 10px; margin: 10px 0; border-radius: 8px; border: 1px solid #ccc;">
+    <button type="submit" style="width: 100%; padding: 10px; background: #004080; color: white; border: none; border-radius: 8px;">Login</button>
+</form>
+{% endblock %}
